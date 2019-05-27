@@ -29,8 +29,8 @@ const students = [
 let countnam = 0;
 let countnu = 0;
 
-students.forEach((element, i) => {
-        if (element.gender == "male")
+students.forEach(element => {
+        if (element.gender === "male")
         countnam++;
         else 
         countnu++;
@@ -43,3 +43,4 @@ console.log('So luong hs nu la: ' + countnu);
 const newstudents = students.map(element => element.name);
 
 console.log(newstudents);
+
