@@ -40,11 +40,6 @@ students.forEach((element, i) => {
 console.log('So luong hs nam la: ' + countnam);
 console.log('So luong hs nu la: ' + countnu);
 
-let newstudents = [];
-
-students.map(element => {
- return newstudents.push(element.name);
-
-});
+const newstudents = students.map(element => element.name);
 
 console.log(newstudents);
