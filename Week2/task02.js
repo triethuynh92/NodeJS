@@ -14,7 +14,7 @@ fs.readFile('products.json', 'utf8', (err, data) => {
     console.log('So luong san pham la: ' + objproduct.length + ' san pham.');
 
     // Convert dateUpdated of each item into real Date
-    let date = objproduct.forEach(element => {
+    objproduct.forEach(element => {
         element.dateUpdated = new Date(element.dateUpdated);
     });
     console.log(objproduct);
