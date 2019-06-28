@@ -3,7 +3,7 @@ const router = express.Router();
 const ProductModel = require('../models/product');
 
 /* GET product listing. */
-router.get('/products', function(req, res, next) {
+router.get('', function(req, res, next) {
 	ProductModel
 		.find({})
 		.limit(50)
@@ -18,7 +18,7 @@ router.get('/products', function(req, res, next) {
 });
 
 /* GET product listing. */
-router.get('/products/:productId', function(req, res, next) {
+router.get('/:productId', function(req, res, next) {
 	const {productId} = req.params || {};
 
 	ProductModel
@@ -29,7 +29,7 @@ router.get('/products/:productId', function(req, res, next) {
 		})
 		.catch(err => {
 			console.log(err);
-		});
+		}); 
 });
 
 module.exports = router;

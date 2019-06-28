@@ -1,46 +1,115 @@
-var products = require('../data/products.json');
-var categories = require('../data/categories.json');
-var users = require('../data/users.json');
+
+const ProductModel = require('../models/product');
+const CategoryModel = require('../models/category');
+const UserModel = require('../models/user');
+
+
+const countProduct = async () => {
+  return ProductModel.count().exec();
+};
+
+const countUser = async () => {
+  return UserModel.count().exec();
+};
+
+const countCategory = async () => {
+  return CategoryModel.count().exec();
+};
 
 exports.getAdminPage = (req, res) => {
-  res.render('admin', {
-    productsTotal: products.body.length,
-    categoriesTotal: categories.body.length,
-    usersTotal: users.body.length,
-    ordersTotal: 0
+  Promise
+  .all([
+    countProduct(),
+    countCategory(),
+    countUser(),
+  ]).then(([productsTotal, categoriesTotal, usersTotal]) => {
+      res.render('admin' , {
+        productsTotal: productsTotal,
+        categoriesTotal: categoriesTotal,
+        usersTotal: usersTotal,
+        ordersTotal: 0
+      });
   });
 }
 
-//Total
 exports.getProductsPage = (req, res) => {
-  res.render('products', {
-    products: products.body
-  });
+    ProductModel
+    .find({})
+    .limit(50)
+    .exec()
+    .then((data) => {
+      res.render('products', {
+        products: data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+    
 }
 
 exports.getCategoriesPage = (req, res) => {
-  res.render('categories', {
-    categories: categories.body
+  CategoryModel
+  .find({})
+  .limit(10)
+  .exec()
+  .then((data) => {
+    res.render('categories', {
+      categories: data
+    } )
+  })
+  .catch(err => {
+    console.log(err);
   });
 }
 
 exports.getUsersPage = (req, res) => {
-  res.render('users', {
-    users: users.body
-  });
+   UserModel
+   .find()
+   .limit(20)
+   .exec()
+   .then((data) => {
+     res.render('users', {
+      users: data
+     })
+   })
+   .catch(err => {
+     console.log(err);
+   })
 }
 
-//Details
 exports.getProductDetails = (req, res) => {
-  const product = products.body.find(user => user._id === req.params.id);
-  res.render('productDetails', {
-    product: product
-  });
-}
+  ProductModel
+  .findById(req.params.id)
+  .then(product => {
+    if(!product) {
+      return res.status(404).send({
+        message: "Products not found with id " + req.params.id
+      });
+    }
+    res.render('productDetails', {
+      product: product
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  })
+} 
 
 exports.getUserDetails = (req, res) => {
-  const user = users.body.find(user => user._id === req.params.id);
-  res.render('usersDetails', {
-    user: user
-  });
+  UserModel
+  .findById(req.params.id)
+  .then(user => {
+    if(!user) {
+      return res.status(404).send({
+        message: "Users not found with id " + req.params.id
+      });
+    }
+    res.render('usersDetails', {
+      user: user
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  })
 }

@@ -2,10 +2,13 @@
   "name": "myapp",
   "version": "0.0.0",
   "private": true,
+  "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "seed-data": "node migration/index.js"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "debug": "^2.6.9",
     "express": "^4.16.4",
@@ -13,6 +16,7 @@
     "handlebars": "^4.1.2",
     "hbs": "^4.0.4",
     "http-errors": "^1.6.3",
+    "mongodb": "^3.2.7",
     "mongoose": "^5.5.14",
     "morgan": "^1.9.1",
     "partial": "0.0.7"
