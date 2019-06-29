@@ -4,7 +4,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node ./bin/www",
     "seed-data": "node migration/index.js"
   },
   "dependencies": {
@@ -15,7 +15,6 @@
     "express-handlebars": "^3.1.0",
     "handlebars": "^4.1.2",
     "hbs": "^4.0.4",
-    "http-errors": "^1.6.3",
     "mongodb": "^3.2.7",
     "mongoose": "^5.5.14",
     "morgan": "^1.9.1",
