@@ -1,4 +1,4 @@
-
+const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -46,9 +46,9 @@ app.use('/api/users', apiUsers);
 app.use('/api/categories', apiCategories);
 
 // catch 404 and forward to error handler
-//app.use(function(req, res, next) {
-//  next(createError(404));
-//});
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
 // error handler
 app.use(function(err, req, res, next) {
