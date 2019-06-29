@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Types = mongoose.mongo.Types;
 
 const {
-  MONGO_URI = 'mongodb://localhost:27017/nordic',
+  //MONGO_URI = 'mongodb://localhost:27017/nordic',
+  MONGO_URI = 'mongodb+srv://devops:share123@cluster0-7pxu5.gcp.mongodb.net/nordic',
 } = process.env;
 
 const Product = require('../models/product');

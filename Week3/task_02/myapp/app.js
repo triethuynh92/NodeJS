@@ -14,7 +14,8 @@ const apiCategories = require('./routes/apicategories');
 
 const mongoose = require('mongoose');
 const {
-  MONGO_URI = 'mongodb://localhost:27017/nordic',
+  //MONGO_URI = 'mongodb://localhost:27017/nordic',
+  MONGO_URI = 'mongodb+srv://devops:share123@cluster0-7pxu5.gcp.mongodb.net/nordic?retryWrites=true',
 } = process.env;
 
 mongoose
